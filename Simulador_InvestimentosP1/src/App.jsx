@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import CapturaDados from './components/CapturaDados.jsx'
+import ExibeDados from './components/ExibeDados'
 
 function App() {
   const [valorInicial, setValorInicial] = useState('')
@@ -72,6 +73,7 @@ function App() {
             aoCalcular={calcularSimulacao}
             aoLimpar={limparCampos}
           />
+          <ExibeDados resultado={resultado} />
         </div>
       </div>
     </div>
