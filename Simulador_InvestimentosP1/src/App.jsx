@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import CapturaDados from './components/CapturaDados.jsx'
 import ExibeDados from './components/ExibeDados'
+import HistoricoSimulacoes from './components/HistoricoSimulacoes'
 
 function App() {
   const [valorInicial, setValorInicial] = useState('')
@@ -8,6 +9,7 @@ function App() {
   const [taxaJuros, setTaxaJuros] = useState('')
   const [periodo, setPeriodo] = useState('')
   const [resultado, setResultado] = useState(null)
+  const [historico, setHistorico] = useState([])
 
   const calcularSimulacao = () => {
   const P = parseFloat(valorInicial)
@@ -40,8 +42,16 @@ function App() {
     jurosAcumulados,
     rentabilidade,
   }
-  console.log(novoResultado)
+  
   setResultado(novoResultado)
+
+  const novaSimulação = {
+    id: Date.now(),
+    dataHora: new Date().toLocaleString('pt-BR'),
+    valorFinal,
+  }
+
+  setHistorico([novaSimulação, ...historico])
   }
 
   const limparCampos = () => {
@@ -74,6 +84,8 @@ function App() {
             aoLimpar={limparCampos}
           />
           <ExibeDados resultado={resultado} />
+
+          <HistoricoSimulacoes historico={historico} />
         </div>
       </div>
     </div>
